@@ -1,6 +1,6 @@
-<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.zhenghao.phonegaphello" version="1.0.0">
-  <name>PhoneGapHello</name>
-  <description>Hello World sample application that responds to the deviceready event.</description>
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.zhenghao.asdas-calc" version="1.0.0">
+  <name>ASDAS Calculator</name>
+  <description>An application that can calculate ASDAS score for ankylosing spondylitis patients.</description>
   <author href="http://phonegap.com" email="support@phonegap.com">PhoneGap Team</author>
   <content src="index.html"/>
   <preference name="DisallowOverscroll" value="true"/>
