@@ -1,5 +1,5 @@
 body {
-	font-family: Arial, STXihei, "华文细黑", "Microsoft Yahei", "微软雅黑", sans-serif;
+	font-family: Arial, 微软雅黑, 黑体, sans-serif;
 	text-align: center;
 	margin: 0;
 	padding: 0;
@@ -35,44 +35,39 @@ form#asdas-form {
 #prev-q-button {
 	position: fixed;
 	left: 0;
-	top: 0;
+	top: 80px;
 	width: 60px;
 	height: 60px;
 	color: white;
 	z-index: 2;
 }
 
-.box-content {
+#prev-q-button div, .control-panel .display div, table.keypad td div {
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-}
-
-#prev-q-button div {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+	-webkit-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
 }
 
 .asdas-question {
-	/*background-color: #00bfba;*/
 	color: white;
+	padding: 0 60px;
 	margin: 0;
 	border: none;
 }
 
 .asdas-question .title {
-	font-size: 1.5em;
+	font-size: 1.3em;
 }
 
 .asdas-question .desc {
-	font-size: 1em;
+	font-size: 1.1em;
 }
 
 .asdas-question .hint {
-	font-size: 0.7em;
+	font-size: 0.9em;
 }
 
 .control-panel {
@@ -83,20 +78,15 @@ form#asdas-form {
 }
 
 .control-panel .display {
-	/*background-color:#00bfba;*/
 	width: 100%;
-	height: 80px;
 	position: relative;
-	font-size: 50px;
+	font-size: 40px;
 	color: #00bfba;
 	background-color: #f6f6f6;
 }
 
-.control-panel .display div {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+#control-panel-0 .display {
+	height: 80px;
 }
 
 table.keypad {
@@ -120,11 +110,53 @@ table.keypad td:before { /* set height of key piece according to its width */
 	padding-top: 100%;
 } 
 
-table.keypad td div {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+#control-panel-1 .upper-panel {
+	background-color: #f6f6f6;
+	padding: 10px;
+}
+
+#crp-esr-buttons {
+	background-color: #f6f6f6;
+	height: 32px;
+	width: 100%;
+	z-index: 2;
+	overflow: visible;
+}
+
+#crp-esr-buttons .button {
+	border: solid #00bfba 1px;
+	color: #00bfba;
+	display: inline-block;
+	padding: 5px;
+	margin: 0;
+	float: left;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	width: 33.33%;
+}
+
+#crp-esr-buttons .button:first-of-type {
+	border-radius: 8px 0 0 8px;
+	border-right: none;
+}
+
+#crp-esr-buttons .button:last-of-type {
+	border-radius: 0 8px 8px 0;
+	border-left: none;
+}
+
+#crp-esr-buttons input[type="radio"] {
+	display: none;
+}
+
+#crp-esr-buttons input[type="radio"]:checked + .button {
+	color: white;
+	background-color: #00bfba;
+}
+
+#control-panel-1 .display {
+	height: 44px;
 }
 
 #clear-button {
@@ -185,23 +217,7 @@ table#asdas-activity {
 	margin: 0;
 	padding: 10px;
 }
-
-.asdas-activity-0 {
-	background-color: #ffff33;
-}
-
-.asdas-activity-1 {
-	background-color: #ffaa33;
-}
-
-.asdas-activity-2 {
-	background-color: #ff5533;
-}
-
-.asdas-activity-3 {
-	background-color: #ff0033;
-}
-
+ 
 #markers {
 	height: 30px;
 }
@@ -211,6 +227,8 @@ table#asdas-activity {
 	position: absolute;
 	text-align: center;
 	transform: translate(-50%, 8px);
+	-webkit-transform: translate(-50%, 8px);
+	-ms-transform: translate(-50%, 8px);
 	font-size: 14px;
 }
 
