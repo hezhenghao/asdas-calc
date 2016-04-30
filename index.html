@@ -15,7 +15,7 @@
 	<div id="header">ASDAS计算器</div>
 	<div id="main">
 		<form id="asdas-form" style="display:block">
-			<div id="prev-q-button" style="display:none"><div>&lt;</div></div>
+			<div id="prev-q-button" style="display:none"><div><img src="img/prev.png" alt="previous question" width="15"/></div></div>
 			<fieldset class="asdas-question" style="display:block">
 				<p class="title">总的背痛</p>
 				<p class="desc">如何描述过去一周内AS颈、背或髋痛的总体水平？</p>
@@ -60,18 +60,23 @@
 						<td class="key"><div>8</div></td>
 						<td class="key"><div>9</div></td>
 						<td class="key"><div>10</div></td>
-						<td id="next-q-button"><div><img src="img/next.png" alt="next question"/></div></td>
+						<td id="next-q-button"><div><img src="img/next.png" alt="next question" width="15"/></div></td>
 					</tr>
 				</table>
 			</div>
 			<div id="control-panel-1" class="control-panel" style="display:none">
-				<p><select name="crp-or-esr" id="crp-or-esr">
-					<option value="crp">CRP (mg/l)</option>
-					<option value="crp-dl">CRP (mg/dl)</option>
-					<option value="esr">ESR (mm/h)</option>
-				</select></p>
-				<div id="clear-button"><img src="img/delete.png" alt="delete" width="30"></div>
-				<div class="display"><div id="display-1-content">0</div></div>
+				<div class="upper-panel">
+					<div id="crp-esr-buttons">
+						<input type="radio" id="crp-esr-crp" name="crp-or-esr" value="crp" checked />
+						<label class="button" for="crp-esr-crp">CRP mg/l</label>
+						<input type="radio" id="crp-esr-crp-dl" name="crp-or-esr" value="crp-dl"/>
+						<label class="button" for="crp-esr-crp-dl">CRP mg/dl</label>
+						<input type="radio" id="crp-esr-esr" name="crp-or-esr" value="esr"/>
+						<label class="button" for="crp-esr-esr">ESR mm/h</label>
+					</div>
+					<div class="display"><div id="display-1-content">0</div></div>
+					<div id="clear-button"><img src="img/delete.png" alt="delete" width="30"></div>
+				</div>
 				<table class="keypad">
 					<tr>
 						<td class="key"><div>0</div></td>
@@ -100,7 +105,7 @@
 				<tr><td class="q">外周疼痛/肿胀</td><td class="a" id="answer-pps"></td></tr>
 				<tr><td class="q">晨僵持续时间</td><td class="a" id="answer-dms"></td></tr>
 				<tr><td class="q">患者总体评价</td><td class="a" id="answer-pg"></td></tr>
-				<tr><td class="q">CRP或ESR</td><td class="a" id="answer-measurement"></td></tr>
+				<tr><td class="q" id="answer-crp-or-esr">CRP或ESR</td><td class="a" id="answer-measurement"></td></tr>
 			</table>
 			<div id="result-illustrator">
 				<div id="result-backdrop">
@@ -112,15 +117,11 @@
 				<input type="hidden" id="activity-bar-cut-1" value="1.3"/>
 				<input type="hidden" id="activity-bar-cut-2" value="2.1"/>
 				<input type="hidden" id="activity-bar-cut-3" value="3.5"/>
-				<input type="hidden" id="activity-color-0" value="#ffff33"/>
-				<input type="hidden" id="activity-color-1" value="#ffaa33"/>
-				<input type="hidden" id="activity-color-2" value="#ff5533"/>
-				<input type="hidden" id="activity-color-3" value="#ff0033"/>
 				<table id="asdas-activity"><tr>
-					<td class="asdas-activity-0" style="width: 26%">疾病不活动</td>
-					<td class="asdas-activity-1" style="width: 16%">疾病中度活动</td>
-					<td class="asdas-activity-2" style="width: 28%">疾病活动度高</td>
-					<td class="asdas-activity-3" style="width: 30%">疾病活动度非常高</td>
+					<td id="asdas-activity-0" style="width: 26%; background-color:#ffeb99">疾病不活动</td>
+					<td id="asdas-activity-1" style="width: 16%; background-color:#ffc000">疾病中度活动</td>
+					<td id="asdas-activity-2" style="width: 28%; background-color:#ff6800">疾病活动度高</td>
+					<td id="asdas-activity-3" style="width: 30%; background-color:#ff2b00">疾病活动度非常高</td>
 				</tr></table>
 				<div id="markers">
 					<div class="asdas-marker" style="left: 26%">1.3</div>
