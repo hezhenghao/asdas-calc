@@ -1,5 +1,5 @@
 var currentQNum = 0;
-var bp = 0, pps = 0, dms = 0, pg = 0, crp_or_esr = "crp", measurement = "";
+var bp = 0, pps = 0, dms = 0, pg = 0, calc_mode = "crp", measurement = "0";
 
 $("#next-q-button").click(function(){
 	currentQNum++;
@@ -72,7 +72,10 @@ $("#control-panel-0 .key").click(function(){
 
 $("#control-panel-1 .key").click(function(){
 	var keyVal = $(this).text();
-	var oldContent = $("#display-1-content").text();
+	var oldContent = measurement;
+	if(oldContent == "0" && keyVal != ".") {
+		oldContent = "";
+	}
 	var newContent = oldContent + keyVal;
 	measurement = newContent;
 	$("#display-1-content").text(measurement);
@@ -80,16 +83,23 @@ $("#control-panel-1 .key").click(function(){
 
 $("#clear-button").click(function() {
 	measurement = measurement.substr(0, measurement.length-1);
+	if(measurement == "") {
+		measurement = "0";
+	}
 	$("#display-1-content").text(measurement);
 });
 
-function calcASDASCRP() {
+$("#crp-esr-buttons").click(function() {
+	calc_mode = $('input[name="crp-or-esr"]:checked').val();
+});
+
+function calcASDASCRP(crp) {
 	var result =
         0.12 * bp +
         0.06 * dms +
         0.11 * pg +
         0.07 * pps +
-        0.58 * Math.log(1 + 1.0 * measurement); // multiply by 1.0 to prevent string concatenation
+        0.58 * Math.log(1 + 1.0 * crp); // multiply by 1.0 to prevent string concatenation
 	return result;
 }
 
@@ -105,12 +115,10 @@ function calcASDASESR() {
 
 function calcASDAS() {
 	var result;
-	var calc_mode = $('#crp-or-esr').val();
 	if (calc_mode == 'crp') {
-		result = calcASDASCRP();
+		result = calcASDASCRP(measurement);
 	} else if (calc_mode == 'crp-dl') {
-		measurement = measurement * 10;
-		result = calcASDASCRP();
+		result = calcASDASCRP(measurement * 10);
 	} else if (calc_mode == 'esr') {
 		result = calcASDASESR();
 	} else {
@@ -126,18 +134,19 @@ function onAsdasFormSubmit() {
 	$('#answer-pps').text(pps);
 	$('#answer-dms').text(dms);
 	$('#answer-pg').text(pg);
+	$('#answer-crp-or-esr').text($('label[for="crp-esr-' + calc_mode + '"]').text());
 	$('#answer-measurement').text(measurement);
 	var ASDAS = calcASDAS();
 	$('#asdas-result').text(ASDAS.toFixed(1));
 	var backdrop_color;
 	if (ASDAS < 1.3) {
-		backdrop_color = '#ffff33';
+		backdrop_color = $('#asdas-activity-0').css("background-color");
 	} else if (ASDAS < 2.1) {
-		backdrop_color = '#ffaa33';
+		backdrop_color = $('#asdas-activity-1').css("background-color");
 	} else if (ASDAS < 3.5) {
-		backdrop_color = '#ff5533';
+		backdrop_color = $('#asdas-activity-2').css("background-color");
 	} else {
-		backdrop_color = '#ff0033';
+		backdrop_color = $('#asdas-activity-3').css("background-color");
 	}
 	$('#result-backdrop').css("background-color", backdrop_color);
 }
