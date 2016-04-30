@@ -1,47 +1,137 @@
 body {
-	font-family: 黑体, arial, sans-serif;
+	font-family: Arial, STXihei, "华文细黑", "Microsoft Yahei", "微软雅黑", sans-serif;
 	text-align: center;
 	margin: 0;
 	padding: 0;
 }
 
-h1 {
-	//position: fixed;
+#header {
+	color: white;
+	font-size: 1.5em;
+	background-color: black;
+	position: fixed;
 	top: 0;
+	z-index: 1;
+	width: 100%;
+	text-align: center;
+	padding: 15px;
+}
+
+#main {
+	z-index: 0;
 }
 
 form {
 	margin: 0;
+	position: relative;
+	padding-top: 60px;
 }
 
-fieldset {
-	background-color: DarkBlue;
+form#asdas-form {
+	background-color: #00bfba;
+	height: 480px;
+}
+
+#prev-q-button {
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 60px;
+	height: 60px;
+	color: white;
+	z-index: 2;
+}
+
+.box-content {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+#prev-q-button div {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.asdas-question {
+	/*background-color: #00bfba;*/
 	color: white;
 	margin: 0;
 	border: none;
 }
 
-fieldset .title {
+.asdas-question .title {
 	font-size: 1.5em;
 }
 
-fieldset .desc {
+.asdas-question .desc {
 	font-size: 1em;
 }
 
-fieldset .hint {
+.asdas-question .hint {
 	font-size: 0.7em;
 }
 
-button {
-	color: white;
-	background-color: DarkBlue;
-	border-style: none;
-	padding: 15px 32px;
-	margin: 4px 2px;
-	text-align: center;
-	font-size: 1.2em;
-	cursor: pointer;
+.control-panel {
+	width: 100%;
+	position: fixed;
+	bottom: 0;
+	z-index: 1;
+}
+
+.control-panel .display {
+	/*background-color:#00bfba;*/
+	width: 100%;
+	height: 80px;
+	position: relative;
+	font-size: 50px;
+	color: #00bfba;
+	background-color: #f6f6f6;
+}
+
+.control-panel .display div {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+table.keypad {
+	width: 100%;
+	margin: auto;
+	border-spacing: 0;
+}
+
+table.keypad td { /* key piece */
+	border: solid #c0c0c0 1px;
+	width: 25%;	
+	position: relative;
+	background-color: white;
+	font-size: 30px;
+	color: #666666;
+}
+ 
+table.keypad td:before { /* set height of key piece according to its width */
+	content: "";
+	display: block;
+	padding-top: 100%;
+} 
+
+table.keypad td div {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+#clear-button {
+	position: absolute;
+	right: 20px;
+	top: 70px;
+	z-index: 2;
 }
 
 .big-caption {
@@ -50,15 +140,34 @@ button {
 	padding: 0;
 }
 
-#asdas-result-panel .main {
+#result-backdrop {
+	padding: 30px;
+}
+
+form#asdas-result-panel {
 	position: relative;
-	padding: 0;
-	margin: 50px 0;
+}
+
+table#questions-summary {
+	background-color: lightgrey;
+	width: 100%;
+	padding: 5px 20px;
+}
+
+table#questions-summary td {
+	padding: 5px;
+}
+
+#questions-summary  .q {
+	text-align: left;
+}
+
+#questions-summary .a {
+	text-align: right;
 }
 
 #asdas-result {
-	font-size: 3em;
-	font-weight: bold;
+	font-size: 4em;
 	margin: 0;
 	padding: 0;
 }
@@ -67,8 +176,9 @@ table#asdas-activity {
 	font-size: 0.7em;
 	border-spacing: 0;
 	border-collapse: separate;
+    width: 100%;
 	margin: auto;
-	pading: 0;
+	padding: 0;
 }
 
 #asdas-activity td {
@@ -92,8 +202,32 @@ table#asdas-activity {
 	background-color: #ff0033;
 }
 
+#markers {
+	height: 30px;
+}
+
 .asdas-marker {
 	float: left;
 	position: absolute;
 	text-align: center;
+	transform: translate(-50%, 8px);
+	font-size: 14px;
+}
+
+#improvement {
+	margin: 20px;
+}
+
+#recalculate-button {
+	color: white;
+	background-color: #00bfba;
+	width: 90%;
+	font-family: "黑体", sans-serif;
+	border-style: none;
+	border-radius: 8px;
+	padding: 15px 32px;
+	margin: 10px;
+	text-align: center;
+	font-size: 1.2em;
+	cursor: pointer;
 }
