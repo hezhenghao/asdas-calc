@@ -4,75 +4,140 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="format-detection" content="telephone=no" />
-    <meta name="msapplication-tap-highlight" content="no" />
-    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+	<meta name="msapplication-tap-highlight" content="no" />
+	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
 	<meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />
 	<link rel="stylesheet" type="text/css" href="css/index.css" />
 	<title>ASDAS计算器</title>
 </head>
 
 <body>
-	<h1>ASDAS计算器</h1>
-	<form id="asdas-form" action="javascript:onAsdasFormSubmit();">
-		<fieldset>
-			<p class="title">总的背痛</p>
-			<p class="desc">如何描述过去一周内AS颈、背或髋痛的总体水平？</p>
-			<p class="hint">0 = 无，10 = 非常严重</p>
-			<input id="bp" type="number" min="0" max="10" required />
-		</fieldset>
-		<fieldset>
-			<p class="title">外周疼痛/肿胀</p>
-			<p class="desc">如何描述过去一周内颈、背或髋关节之外的其他关节疼痛/肿胀的总体水平？</p>
-			<p class="hint">0 = 无，10 = 非常严重</p>
-			<input id="pps" type="number" min="0" max="10" required />
-		</fieldset>
-		<fieldset>
-			<p class="title">晨僵持续时间</p>
-			<p class="desc">过去一周醒来后晨僵持续多长时间？</p>
-			<p class="hint">0 = 无，10 = 2小时以上</p>
-			<input id="dms" type="number" min="0" max="10" required />
-		</fieldset>
-		<fieldset>
-			<p class="title">患者总体评价</p>
-			<p class="desc">过去一周中风湿性疾病的平均活动情况如何？</p>
-			<p class="hint">0 = 不活动，10 = 非常活动</p>
-			<input id="pg" type="number" min="0" max="10" required />
-		</fieldset>
-		<fieldset>
-			<p class="title">CRP或ESR</p>
-			<p class="desc">请输入CRP或ESR的测量值</p>
-			<p><select id="crp-or-esr" name="crp-or-esr">
-				<option value="crp">CRP (mg/l)</option>
-				<option value="esr">ESR (mm/h)</option>
-			</select></p>
-			<input id="measurement" type="text" required />
-		</fieldset>
-		<button type="submit">计算ASDAS</button>
-	</form>
-	<form id="asdas-result-panel" style="display:none" action="javascript:onAsdasResultPanelSubmit();">
-		<div class="main">
-			<div id="result-backdrop">
-				<p class="big-caption">ASDAS</p>
-				<p id="asdas-result"></p>
+	<div id="header">ASDAS计算器</div>
+	<div id="main">
+		<form id="asdas-form" style="display:block">
+			<div id="prev-q-button" style="display:none"><div>&lt;</div></div>
+			<fieldset class="asdas-question" style="display:block">
+				<p class="title">总的背痛</p>
+				<p class="desc">如何描述过去一周内AS颈、背或髋痛的总体水平？</p>
+				<p class="hint">0 = 无，10 = 非常严重</p>
+			</fieldset>
+			<fieldset class="asdas-question" style="display:none">
+				<p class="title">外周疼痛/肿胀</p>
+				<p class="desc">如何描述过去一周内颈、背或髋关节之外的其他关节疼痛/肿胀的总体水平？</p>
+				<p class="hint">0 = 无，10 = 非常严重</p>
+			</fieldset>
+			<fieldset class="asdas-question" style="display:none">
+				<p class="title">晨僵持续时间</p>
+				<p class="desc">过去一周醒来后晨僵持续多长时间？</p>
+				<p class="hint">0 = 无，10 = 2小时以上</p>
+			</fieldset>
+			<fieldset class="asdas-question" style="display:none">
+				<p class="title">患者总体评价</p>
+				<p class="desc">过去一周中风湿性疾病的平均活动情况如何？</p>
+				<p class="hint">0 = 不活动，10 = 非常活动</p>
+			</fieldset>
+			<fieldset class="asdas-question" style="display:none">
+				<p class="title">CRP或ESR</p>
+				<p class="desc">请输入CRP或ESR的测量值。</p>
+				<p class="hint">当CRP水平低于检测限，即2 mg/l（或0.2 mg/dl）时，以2 mg/l（或0.2 mg/dl）计</p>
+			</fieldset>
+			<div id="control-panel-0" class="control-panel" style="display:block">
+				<div class="display"><div id="display-0-content">0</div></div>
+				<table class="keypad">
+					<tr>
+						<td class="key"><div>0</div></td>
+						<td class="key"><div>1</div></td>
+						<td class="key"><div>2</div></td>
+						<td class="key"><div>3</div></td>
+					</tr>
+					<tr>
+						<td class="key"><div>4</div></td>
+						<td class="key"><div>5</div></td>
+						<td class="key"><div>6</div></td>
+						<td class="key"><div>7</div></td>
+					</tr>
+					<tr>
+						<td class="key"><div>8</div></td>
+						<td class="key"><div>9</div></td>
+						<td class="key"><div>10</div></td>
+						<td id="next-q-button"><div><img src="img/next.png" alt="next question"/></div></td>
+					</tr>
+				</table>
 			</div>
-			<table id="asdas-activity"><tr>
-				<td class="asdas-activity-0" style="width: 26%">疾病不活动</td>
-				<td class="asdas-activity-1" style="width: 16%">疾病中度活动</td>
-				<td class="asdas-activity-2" style="width: 28%">疾病活动度高</td>
-				<td class="asdas-activity-3" style="width: 30%">疾病活动度非常高</td>
-			</tr></table>
-			<div class="asdas-marker" style="left: 26%">1.3</div>
-			<div class="asdas-marker" style="left: 42%">2.1</div>
-			<div class="asdas-marker" style="left: 70%">3.5</div>
-		</div>
-		<div>
-			<p>临床重要改善：&ge; 1.1</p>
-			<p>重大改善：&ge; 2</p>
-		</div>
-		<button type="submit">重新计算</button>
-	</form>
+			<div id="control-panel-1" class="control-panel" style="display:none">
+				<p><select name="crp-or-esr" id="crp-or-esr">
+					<option value="crp">CRP (mg/l)</option>
+					<option value="crp-dl">CRP (mg/dl)</option>
+					<option value="esr">ESR (mm/h)</option>
+				</select></p>
+				<div id="clear-button"><img src="img/delete.png" alt="delete" width="30"></div>
+				<div class="display"><div id="display-1-content">0</div></div>
+				<table class="keypad">
+					<tr>
+						<td class="key"><div>0</div></td>
+						<td class="key"><div>1</div></td>
+						<td class="key"><div>2</div></td>
+						<td class="key"><div>3</div></td>
+					</tr>
+					<tr>
+						<td class="key"><div>4</div></td>
+						<td class="key"><div>5</div></td>
+						<td class="key"><div>6</div></td>
+						<td class="key"><div>7</div></td>
+					</tr>
+					<tr>
+						<td class="key"><div>8</div></td>
+						<td class="key"><div>9</div></td>
+						<td class="key"><div>.</div></td>
+						<td id="to-result-button"><div>=</div></td>
+					</tr>
+				</table>
+			</div>
+		</form>
+		<form id="asdas-result-panel" style="display:none" action="javascript:onAsdasResultPanelSubmit();">
+			<table id="questions-summary">
+				<tr><td class="q">总的背痛</td><td class="a" id="answer-bp"></td></tr>
+				<tr><td class="q">外周疼痛/肿胀</td><td class="a" id="answer-pps"></td></tr>
+				<tr><td class="q">晨僵持续时间</td><td class="a" id="answer-dms"></td></tr>
+				<tr><td class="q">患者总体评价</td><td class="a" id="answer-pg"></td></tr>
+				<tr><td class="q">CRP或ESR</td><td class="a" id="answer-measurement"></td></tr>
+			</table>
+			<div id="result-illustrator">
+				<div id="result-backdrop">
+					<p class="big-caption">ASDAS</p>
+					<p id="asdas-result">0</p>
+				</div>
+				<input type="hidden" id="activity-bar-start" value="0"/>
+				<input type="hidden" id="activity-bar-end" value="5.0"/>
+				<input type="hidden" id="activity-bar-cut-1" value="1.3"/>
+				<input type="hidden" id="activity-bar-cut-2" value="2.1"/>
+				<input type="hidden" id="activity-bar-cut-3" value="3.5"/>
+				<input type="hidden" id="activity-color-0" value="#ffff33"/>
+				<input type="hidden" id="activity-color-1" value="#ffaa33"/>
+				<input type="hidden" id="activity-color-2" value="#ff5533"/>
+				<input type="hidden" id="activity-color-3" value="#ff0033"/>
+				<table id="asdas-activity"><tr>
+					<td class="asdas-activity-0" style="width: 26%">疾病不活动</td>
+					<td class="asdas-activity-1" style="width: 16%">疾病中度活动</td>
+					<td class="asdas-activity-2" style="width: 28%">疾病活动度高</td>
+					<td class="asdas-activity-3" style="width: 30%">疾病活动度非常高</td>
+				</tr></table>
+				<div id="markers">
+					<div class="asdas-marker" style="left: 26%">1.3</div>
+					<div class="asdas-marker" style="left: 42%">2.1</div>
+					<div class="asdas-marker" style="left: 70%">3.5</div>
+				</div>
+			</div>
+			<div id="improvement">
+				<p>临床重要改善：&Delta; &ge; 1.1</p>
+				<p>重大改善：&Delta; &ge; 2</p>
+			</div>
+			<button type="submit" id="recalculate-button">重新计算</button>
+		</form>
+	</div>
 	<script type="text/javascript" src="cordova.js"></script>
-    <script type="text/javascript" src="js/index.js"></script>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/index-new.js"></script>
 </body>
 
 </html>
